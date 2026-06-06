@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DollarDoor — Stop Losing Money on Foreign Payments</title>
+  <meta name="description" content="Receive USD from foreign clients, hold it, spend on foreign software subscriptions directly, convert only what you need to INR at 1% fee. Built for Indian freelancers and agencies." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080C18;
+      --bg2:       #0D1425;
+      --bg3:       #111A30;
+      --blue:      #2563EB;
+      --blue-l:    #3B82F6;
+      --green:     #10B981;
+      --green-l:   #34D399;
+      --amber:     #F59E0B;
+      --white:     #F0F4FF;
+      --grey:      #8892A4;
+      --grey2:     #4B5568;
+      --border:    rgba(255,255,255,0.07);
+      --font:      'Bricolage Grotesque', sans-serif;
+      --mono:      'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(8,12,24,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: white;
+    }
+
+    .nav-btn {
+      background: var(--blue);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: var(--font);
+    }
+    .nav-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    section { position: relative; z-index: 1; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 30%; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.25);
+      color: var(--green-l);
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.5; transform:scale(0.8); }
+    }
+
+    h1 {
+      font-size: clamp(38px, 6.5vw, 76px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      max-width: 880px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    h1 .accent {
+      background: linear-gradient(135deg, var(--blue-l) 0%, var(--green-l) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--grey);
+      max-width: 560px;
+      margin-bottom: 48px;
+      line-height: 1.75;
+      font-weight: 400;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-sub strong { color: var(--white); }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+      padding: 15px 36px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+      letter-spacing: -0.2px;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,99,235,0.4); }
+
+    /* SAVINGS VISUAL */
+    .savings-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-top: 64px;
+      max-width: 680px;
+      width: 100%;
+      animation: fadeUp 0.6s 0.4s ease both;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .saving-item {
+      flex: 1;
+      padding: 20px 16px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+    .saving-item:last-child { border-right: none; }
+
+    .saving-bad {
+      font-size: 22px;
+      font-weight: 700;
+      color: #EF4444;
+      letter-spacing: -0.5px;
+      text-decoration: line-through;
+      opacity: 0.8;
+    }
+
+    .saving-good {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green-l);
+      letter-spacing: -0.5px;
+    }
+
+    .saving-platform {
+      font-size: 11px;
+      color: var(--grey);
+      margin-top: 4px;
+      font-family: var(--mono);
+    }
+
+    /* PROBLEM */
+    .problem {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--blue-l);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      color: var(--grey);
+      font-size: 17px;
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    /* SCENARIO CARD */
+    .scenario {
+      background: var(--bg2);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scenario::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #EF4444, transparent);
+    }
+
+    .scenario-title {
+      font-size: 13px;
+      font-family: var(--mono);
+      color: #EF4444;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .scenario-story {
+      font-size: 16px;
+      color: var(--grey);
+      line-height: 1.8;
+      max-width: 700px;
+    }
+
+    .scenario-story strong { color: var(--white); }
+    .scenario-story .loss { color: #EF4444; font-weight: 700; }
+
+    .problem-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .problem-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .problem-card:hover {
+      border-color: rgba(37,99,235,0.3);
+      transform: translateY(-3px);
+    }
+
+    .problem-emoji { font-size: 28px; margin-bottom: 16px; }
+
+    .problem-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .problem-card p {
+      font-size: 14px;
+      color: var(--grey);
+      line-height: 1.7;
+    }
+
+    .red-text { color: #EF4444; font-weight: 600; }
+
+    /* SOLUTION / HOW IT WORKS */
+    .solution {
+      padding: 100px 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .solution-inner { max-width: 1100px; margin: 0 auto; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0;
+      margin-top: 56px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .step {
+      padding: 36px 28px;
+      border-right: 1px solid var(--border);
+      background: var(--bg3);
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .step:hover { background: rgba(37,99,235,0.05); }
+    .step:last-child { border-right: none; }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .step:hover::before { opacity: 1; }
+
+    .step-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--green-l);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .step-icon { font-size: 30px; margin-bottom: 14px; }
+
+    .step h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .step p { font-size: 13.5px; color: var(--grey); line-height: 1.7; }
+
+    .step-benefit {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--mono);
+      background: rgba(16,185,129,0.1);
+      color: var(--green-l);
+      border: 1px solid rgba(16,185,129,0.2);
+    }
+
+    /* SAVINGS CALCULATOR */
+    .savings {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 56px;
+    }
+
+    @media(max-width: 700px) { .calc-grid { grid-template-columns: 1fr; } }
+
+    .calc-card {
+      border-radius: 20px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .calc-card.bad {
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.2);
+    }
+
+    .calc-card.good {
+      background: rgba(16,185,129,0.06);
+      border: 1px solid rgba(16,185,129,0.25);
+    }
+
+    .calc-card-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .calc-card.bad .calc-card-label { color: #EF4444; }
+    .calc-card.good .calc-card-label { color: var(--green-l); }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .calc-row:last-of-type { border-bottom: none; }
+    .calc-row-label { font-size: 14px; color: var(--grey); }
+
+    .calc-row-value {
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--mono);
+    }
+
+    .calc-card.bad .calc-row-value { color: #EF4444; }
+    .calc-card.good .calc-row-value { color: var(--green-l); }
+
+    .calc-total {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .calc-total-label {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .calc-total-value {
+      font-size: 22px;
+      font-weight: 800;
+      font-family: var(--mono);
+    }
+
+    .calc-card.bad .calc-total-value { color: #EF4444; }
+    .calc-card.good .calc-total-value { color: var(--green-l); }
+
+    .savings-banner {
+      margin-top: 24px;
+      background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .savings-banner p { font-size: 16px; color: var(--grey); line-height: 1.6; }
+    .savings-banner p strong { color: var(--white); }
+
+    .savings-big {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--green-l);
+      letter-spacing: -1.5px;
+      white-space: nowrap;
+      font-family: var(--mono);
+    }
+
+    /* WHO */
+    .who {
+      padding: 100px 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .who-inner { max-width: 1100px; margin: 0 auto; }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 56px;
+    }
+
+    .who-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.2s;
+    }
+
+    .who-card:hover {
+      border-color: rgba(37,99,235,0.35);
+      transform: translateY(-4px);
+      background: rgba(37,99,235,0.04);
+    }
+
+    .who-emoji { font-size: 32px; margin-bottom: 16px; }
+
+    .who-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .who-card p {
+      font-size: 13.5px;
+      color: var(--grey);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .who-saving {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--green-l);
+      background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.2);
+      padding: 6px 12px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    /* BENEFITS */
+    .benefits {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin-top: 56px;
+    }
+
+    .benefit-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      gap: 18px;
+      transition: all 0.2s;
+    }
+
+    .benefit-card:hover {
+      border-color: rgba(37,99,235,0.3);
+      transform: translateY(-3px);
+    }
+
+    .benefit-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      background: rgba(37,99,235,0.1);
+    }
+
+    .benefit-text h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .benefit-text p {
+      font-size: 13.5px;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+
+    /* WAITLIST */
+    .waitlist {
+      padding: 120px 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .waitlist-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .waitlist-card {
+      max-width: 520px;
+      margin: 0 auto;
+      background: var(--bg2);
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 24px;
+      padding: 52px 44px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .waitlist-card h2 {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .waitlist-card .sub {
+      color: var(--grey);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .email-input {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 15px;
+      color: var(--white);
+      font-family: var(--font);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .email-input::placeholder { color: var(--grey2); }
+    .email-input:focus { border-color: var(--blue); }
+
+    .submit-btn {
+      background: linear-gradient(135deg, var(--blue), #1D4ED8);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 15px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: all 0.2s;
+      width: 100%;
+      letter-spacing: -0.2px;
+    }
+
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,99,235,0.4); }
+
+    .waitlist-note {
+      font-size: 12px;
+      color: var(--grey2);
+      margin-top: 14px;
+      font-family: var(--mono);
+    }
+
+    .success-msg {
+      display: none;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 12px;
+      padding: 16px;
+      color: var(--green-l);
+      font-size: 14px;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-left { font-size: 13px; color: var(--grey2); }
+    .footer-right { font-size: 12px; color: var(--grey2); font-family: var(--mono); }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible { opacity:1; transform:translateY(0); }
+
+    @media(max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .steps { grid-template-columns: 1fr; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); }
+      .step:last-child { border-bottom: none; }
+      footer { flex-direction: column; text-align: center; }
+      .waitlist-card { padding: 36px 24px; }
+      .savings-strip { flex-direction: column; }
+      .saving-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .saving-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">
+      <div class="logo-icon">$</div>
+      DollarDoor
+    </a>
+    <a href="#waitlist" class="nav-btn">Join Waitlist</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+
+    <div class="badge">
+      <div class="badge-dot"></div>
+      For Indian freelancers, agencies &amp; creators
+    </div>
+
+    <h1>
+      You earned it.<br/>
+      <span class="accent">Stop losing it</span><br/>
+      to payment fees.
+    </h1>
+
+    <p class="hero-sub">
+      Receive USD from foreign clients, hold it, pay your foreign software subscriptions directly,
+      and convert only what you need to INR —
+      at <strong>1% fee</strong> instead of the <strong>5–9%</strong> PayPal and Payoneer charge.
+    </p>
+
+    <div class="cta-group">
+      <a href="#waitlist" class="btn-primary">Save My Spot — Free →</a>
+    </div>
+
+    <div class="savings-strip">
+      <div class="saving-item">
+        <div class="saving-bad">7%</div>
+        <div class="saving-platform">PayPal fee</div>
+      </div>
+      <div class="saving-item">
+        <div class="saving-bad">5%</div>
+        <div class="saving-platform">SWIFT fee</div>
+      </div>
+      <div class="saving-item">
+        <div class="saving-bad">4%</div>
+        <div class="saving-platform">Payoneer fee</div>
+      </div>
+      <div class="saving-item">
+        <div class="saving-good">1%</div>
+        <div class="saving-platform">DollarDoor ✓</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="fade-up">
+      <div class="section-label">The Problem</div>
+      <h2 class="section-title">Sound familiar?</h2>
+      <p class="section-sub">Every Indian dollar earner faces this every single month.</p>
+    </div>
+
+    <div class="scenario fade-up">
+      <div class="scenario-title">⚠ REAL SCENARIO — HAPPENING RIGHT NOW</div>
+      <p class="scenario-story">
+        Rahul, a developer in Pune, completes a <strong>$3,000 project</strong> for a US startup.
+        He invoices via PayPal. By the time money reaches his Indian bank account,
+        he has lost <span class="loss">$210 in fees and forex spread</span> — and waited 5 days.
+        He converts everything to INR immediately, even though he owes
+        <strong>AWS $200 next week</strong> — so he will convert back and
+        <span class="loss">lose another $14</span>.
+        <br/><br/>
+        <strong>Total loss: Rs 18,500 on a single Rs 2.5 lakh project.</strong>
+        This happens every month.
+      </p>
+    </div>
+
+    <div class="problem-cards">
+      <div class="problem-card fade-up">
+        <div class="problem-emoji">💸</div>
+        <h3>Losing 5–9% every payment</h3>
+        <p>On Rs 20 lakh annual earnings that is <span class="red-text">Rs 1–1.8 lakh/year</span> lost. Not to tax. Not to expenses. Just to payment middlemen.</p>
+      </div>
+      <div class="problem-card fade-up">
+        <div class="problem-emoji">🔄</div>
+        <h3>Converting twice — paying twice</h3>
+        <p>Convert USD to INR. Pay for AWS next week — convert INR back to USD. <span class="red-text">Paying fees both ways</span> on money you already earned.</p>
+      </div>
+      <div class="problem-card fade-up">
+        <div class="problem-emoji">⏳</div>
+        <h3>Waiting 3–7 days for your money</h3>
+        <p>SWIFT transfers take up to a week. You completed the work. Your client paid. <span class="red-text">Your money is stuck somewhere</span> between banks.</p>
+      </div>
+      <div class="problem-card fade-up">
+        <div class="problem-emoji">📄</div>
+        <h3>Tax documents take weeks</h3>
+        <p>FIRC documents — needed for GST and income tax — take weeks from banks. <span class="red-text">Most people file taxes without proper documentation</span> because it is too painful to get.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="solution" id="how">
+    <div class="solution-inner">
+      <div class="fade-up">
+        <div class="section-label">The Solution</div>
+        <h2 class="section-title">How DollarDoor works<br/>for you</h2>
+        <p class="section-sub">Four steps. Your money arrives faster, goes further, and converts smarter.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step fade-up">
+          <div class="step-num">01</div>
+          <div class="step-icon">⚡</div>
+          <h3>Get paid instantly</h3>
+          <p>Share your DollarDoor account number with your foreign client. They pay USD normally. Full amount lands in your balance instantly. No US bank account needed.</p>
+          <span class="step-benefit">Zero fee to receive</span>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">02</div>
+          <div class="step-icon">💳</div>
+          <h3>Spend directly in USD</h3>
+          <p>Your virtual Visa card is linked to your USD balance. Pay any software subscription or merchant globally — online and offline. Zero conversion loss.</p>
+          <span class="step-benefit">No forex loss on tools</span>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">03</div>
+          <div class="step-icon">📈</div>
+          <h3>Your balance earns interest</h3>
+          <p>Money sitting in your USD balance earns 2% interest annually while you decide when to convert. Your idle dollars work for you instead of sitting doing nothing.</p>
+          <span class="step-benefit">2% on idle balance</span>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">04</div>
+          <div class="step-icon">🔁</div>
+          <h3>Convert only what you need</h3>
+          <p>Convert only the remainder to INR when you want — at 1% fee. Your FIRC tax document is auto-generated instantly. No more chasing banks for paperwork.</p>
+          <span class="step-benefit">1% fee + instant FIRC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAVINGS CALCULATOR -->
+  <section class="savings">
+    <div class="fade-up">
+      <div class="section-label">See the difference</div>
+      <h2 class="section-title">Even on Rs 5 lakh income —<br/>you are losing Rs 33,000 every year</h2>
+      <p class="section-sub" style="margin-top:12px">That is not a big earner problem. That is every Indian dollar earner's problem.</p>
+    </div>
+
+    <div class="calc-grid">
+      <div class="calc-card bad fade-up">
+        <div class="calc-card-label">❌ WITHOUT DOLLARDOOR — Rs 5L income</div>
+        <div class="calc-row">
+          <span class="calc-row-label">PayPal fee (6% avg)</span>
+          <span class="calc-row-value">−Rs 30,000</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-row-label">Foreign software subscriptions — double conversion</span>
+          <span class="calc-row-value">−Rs 4,500</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-row-label">SWIFT/bank wire fees</span>
+          <span class="calc-row-value">−Rs 3,750</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-row-label">FIRC documentation delays</span>
+          <span class="calc-row-value">Weeks of pain</span>
+        </div>
+        <div class="calc-total">
+          <span class="calc-total-label">Total money lost</span>
+          <span class="calc-total-value">−Rs 38,250</span>
+        </div>
+      </div>
+
+      <div class="calc-card good fade-up">
+        <div class="calc-card-label">✓ WITH DOLLARDOOR — Rs 5L income</div>
+        <div class="calc-row">
+          <span class="calc-row-label">Conversion fee (1%)</span>
+          <span class="calc-row-value">−Rs 5,000</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-row-label">Foreign subscriptions (paid in USD)</span>
+          <span class="calc-row-value">Rs 0 loss</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-row-label">Receive fee</span>
+          <span class="calc-row-value">Rs 0</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-row-label">FIRC document</span>
+          <span class="calc-row-value">Instant ✓</span>
+        </div>
+        <div class="calc-total">
+          <span class="calc-total-label">Total money lost</span>
+          <span class="calc-total-value">−Rs 5,000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="savings-banner fade-up">
+      <p><strong>You save Rs 33,250 every year</strong> on just Rs 5 lakh foreign income.<br/>That is money you earned doing real work. It should stay with you.</p>
+      <div class="savings-big">Rs 33K saved</div>
+    </div>
+
+    <!-- SAVINGS SCALE CHART -->
+    <div class="fade-up" style="margin-top:48px">
+      <p style="font-size:13px;font-family:var(--mono);color:var(--blue-l);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px">How much you save at every income level</p>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:36px">
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+
+          <div style="display:grid;grid-template-columns:120px 1fr 100px;gap:12px;align-items:center">
+            <span style="font-size:13px;color:var(--grey);font-family:var(--mono)">Rs 5 lakh</span>
+            <div style="background:var(--bg3);border-radius:100px;height:10px;overflow:hidden">
+              <div style="width:11%;height:100%;background:linear-gradient(90deg,var(--green),var(--green-l));border-radius:100px"></div>
+            </div>
+            <span style="font-size:13px;font-weight:700;color:var(--green-l);font-family:var(--mono);text-align:right">Rs 33K</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:120px 1fr 100px;gap:12px;align-items:center">
+            <span style="font-size:13px;color:var(--grey);font-family:var(--mono)">Rs 8 lakh</span>
+            <div style="background:var(--bg3);border-radius:100px;height:10px;overflow:hidden">
+              <div style="width:18%;height:100%;background:linear-gradient(90deg,var(--green),var(--green-l));border-radius:100px"></div>
+            </div>
+            <span style="font-size:13px;font-weight:700;color:var(--green-l);font-family:var(--mono);text-align:right">Rs 53K</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:120px 1fr 100px;gap:12px;align-items:center">
+            <span style="font-size:13px;color:var(--grey);font-family:var(--mono)">Rs 10 lakh</span>
+            <div style="background:var(--bg3);border-radius:100px;height:10px;overflow:hidden">
+              <div style="width:25%;height:100%;background:linear-gradient(90deg,var(--green),var(--green-l));border-radius:100px"></div>
+            </div>
+            <span style="font-size:13px;font-weight:700;color:var(--green-l);font-family:var(--mono);text-align:right">Rs 66K</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:120px 1fr 100px;gap:12px;align-items:center">
+            <span style="font-size:13px;color:var(--grey);font-family:var(--mono)">Rs 15 lakh</span>
+            <div style="background:var(--bg3);border-radius:100px;height:10px;overflow:hidden">
+              <div style="width:38%;height:100%;background:linear-gradient(90deg,var(--blue-l),var(--green-l));border-radius:100px"></div>
+            </div>
+            <span style="font-size:13px;font-weight:700;color:var(--green-l);font-family:var(--mono);text-align:right">Rs 99K</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:120px 1fr 100px;gap:12px;align-items:center">
+            <span style="font-size:13px;color:var(--grey);font-family:var(--mono)">Rs 20 lakh</span>
+            <div style="background:var(--bg3);border-radius:100px;height:10px;overflow:hidden">
+              <div style="width:52%;height:100%;background:linear-gradient(90deg,var(--blue-l),var(--green-l));border-radius:100px"></div>
+            </div>
+            <span style="font-size:13px;font-weight:700;color:var(--green-l);font-family:var(--mono);text-align:right">Rs 1.33L</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:120px 1fr 100px;gap:12px;align-items:center">
+            <span style="font-size:13px;color:var(--grey);font-family:var(--mono)">Rs 25 lakh</span>
+            <div style="background:var(--bg3);border-radius:100px;height:10px;overflow:hidden">
+              <div style="width:68%;height:100%;background:linear-gradient(90deg,var(--blue),var(--green-l));border-radius:100px"></div>
+            </div>
+            <span style="font-size:13px;font-weight:700;color:var(--green-l);font-family:var(--mono);text-align:right">Rs 1.66L</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:120px 1fr 100px;gap:12px;align-items:center">
+            <span style="font-size:13px;color:var(--grey);font-family:var(--mono)">Rs 30 lakh</span>
+            <div style="background:var(--bg3);border-radius:100px;height:10px;overflow:hidden">
+              <div style="width:85%;height:100%;background:linear-gradient(90deg,var(--blue),#10B981);border-radius:100px"></div>
+            </div>
+            <span style="font-size:13px;font-weight:700;color:var(--green-l);font-family:var(--mono);text-align:right">Rs 1.99L</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:120px 1fr 100px;gap:12px;align-items:center">
+            <span style="font-size:13px;color:var(--white);font-weight:700;font-family:var(--mono)">Rs 50 lakh+</span>
+            <div style="background:var(--bg3);border-radius:100px;height:10px;overflow:hidden">
+              <div style="width:100%;height:100%;background:linear-gradient(90deg,#1A56DB,#10B981);border-radius:100px"></div>
+            </div>
+            <span style="font-size:13px;font-weight:700;color:var(--green-l);font-family:var(--mono);text-align:right">Rs 3.32L+</span>
+          </div>
+
+        </div>
+
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);display:flex;gap:20px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--grey);font-family:var(--mono)">
+            <div style="width:12px;height:12px;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--green))"></div>
+            Amount saved vs PayPal/Payoneer/SWIFT
+          </div>
+          <div style="font-size:12px;color:var(--grey2);font-family:var(--mono)">
+            Based on average 6% fee vs DollarDoor 1%
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- WHO -->
+  <section class="who">
+    <div class="who-inner">
+      <div class="fade-up">
+        <div class="section-label">Who It's For</div>
+        <h2 class="section-title">Built for every Indian<br/>earning in dollars</h2>
+      </div>
+
+      <div class="who-grid">
+        <div class="who-card fade-up">
+          <div class="who-emoji">🏢</div>
+          <h3>Dev Agencies &amp; Studios</h3>
+          <p>3–25 person remote agencies billing US clients. Losing Rs 5–20 lakh/year in fees on team payments and project invoices.</p>
+          <span class="who-saving">Save up to Rs 20L/year</span>
+        </div>
+        <div class="who-card fade-up">
+          <div class="who-emoji">💻</div>
+          <h3>Developers &amp; Engineers</h3>
+          <p>Freelancers on Upwork, Toptal, direct contracts. Paying AWS and GitHub in USD every month through double conversion.</p>
+          <span class="who-saving">Save Rs 40K–1.5L/year</span>
+        </div>
+        <div class="who-card fade-up">
+          <div class="who-emoji">🎨</div>
+          <h3>Designers &amp; Architects</h3>
+          <p>International project commissions in USD. Large SWIFT payments losing thousands per transaction in fees.</p>
+          <span class="who-saving">Save Rs 60K–4L/year</span>
+        </div>
+        <div class="who-card fade-up">
+          <div class="who-emoji">🎓</div>
+          <h3>Course Creators &amp; YouTubers</h3>
+          <p>Udemy pays via Payoneer at 3–5%. YouTube AdSense forces conversion. Recurring monthly losses on income you work hard for.</p>
+          <span class="who-saving">Save Rs 20K–75K/year</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits">
+    <div class="fade-up">
+      <div class="section-label">What You Get</div>
+      <h2 class="section-title">Everything you need.<br/>Nothing you don't.</h2>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">⚡</div>
+        <div class="benefit-text">
+          <h4>Virtual USD Account — instantly</h4>
+          <p>Get a US account number in minutes. Share with your foreign client. No paperwork, no US bank visit, no waiting.</p>
+        </div>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">💳</div>
+        <div class="benefit-text">
+          <h4>Virtual Visa Card</h4>
+          <p>Linked to your USD balance. Pay for any tool, any service, any merchant globally — without converting first.</p>
+        </div>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">📄</div>
+        <div class="benefit-text">
+          <h4>Instant FIRC Documents</h4>
+          <p>Every payment auto-generates your FIRC for GST and income tax. No more chasing banks for weeks.</p>
+        </div>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">📈</div>
+        <div class="benefit-text">
+          <h4>2% Interest on USD Balance</h4>
+          <p>Your idle dollars earn 2% annually while you hold them. Your balance grows while you work.</p>
+        </div>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">🔁</div>
+        <div class="benefit-text">
+          <h4>Smart INR Conversion</h4>
+          <p>Convert only when you want, only what you need. Platform shows you the best conversion timing automatically.</p>
+        </div>
+      </div>
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon">🔒</div>
+        <div class="benefit-text">
+          <h4>100% Legal &amp; RBI Compliant</h4>
+          <p>Built on OPGSP framework — the same legal model used by Razorpay, Skydo, and Airwallex. Fully transparent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-glow"></div>
+    <div class="waitlist-card fade-up">
+      <div class="badge" style="margin: 0 auto 24px">
+        <div class="badge-dot"></div>
+        Limited early access
+      </div>
+      <h2>Stop losing Rs 1.33 lakh<br/>every year.</h2>
+      <p class="sub">Join the waitlist. Be first when DollarDoor launches. Free to join, free to use early access.</p>
+
+      <input
+        type="email"
+        class="email-input"
+        id="emailInput"
+        placeholder="your@email.com"
+      />
+      <button class="submit-btn" onclick="handleSubmit()">
+        Join Waitlist — Save My Spot →
+      </button>
+
+      <div class="success-msg" id="successMsg">
+        ✓ You're on the list! We'll reach out when DollarDoor launches.
+      </div>
+
+      <p class="waitlist-note">No spam · No credit card · Unsubscribe anytime</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <strong style="color:var(--white)">DollarDoor</strong> — Dollar infrastructure for India's exports
+    </div>
+    <div class="footer-right">
+      dollardoor.in@gmail.com · Built in India · 2026
+    </div>
+  </footer>
+
+  <script>
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Waitlist submit
+    function handleSubmit() {
+      const email = document.getElementById('emailInput').value;
+      const success = document.getElementById('successMsg');
+      const input = document.getElementById('emailInput');
+
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        input.style.borderColor = '#EF4444';
+        input.placeholder = 'Please enter a valid email';
+        setTimeout(() => {
+          input.style.borderColor = 'var(--border)';
+          input.placeholder = 'your@email.com';
+        }, 2000);
+        return;
+      }
+
+      // REPLACE THIS WITH YOUR GOOGLE FORM URL
+      window.open('https://docs.google.com/forms/d/e/1FAIpQLSfUdkCkyYFk3tCf3Z5aPm8TW3pGwjBgXoZmi2S6hEJ4I9ZHrg/viewform', '_blank');
+
+      success.style.display = 'block';
+      input.value = '';
+      console.log('Waitlist signup:', email);
+    }
+
+    document.getElementById('emailInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') handleSubmit();
+    });
+  </script>
+
+</body>
+</html>
